@@ -48,7 +48,7 @@ var svg = d3.select("#page_1_dataviz")
 		.attr("transform", 
 				"translate (" + margin.left + ", " + margin.top + ")");
 
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv", function(data) {
+d3.csv("https://bozlingo.github.io/page_1_master_data.csv", function(data) {
 
 	// List of subgroups = header of the csv files = soil condition here
 	var subgroups = data.columns.slice(1)
