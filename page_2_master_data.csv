@@ -1,0 +1,190 @@
+Country,Income_Group,Emissions,GDP
+Uruguay,High income,176.5,$267.5
+United States,High income,158317.9,"$110,586.7"
+United Kingdom,High income,14824.2,"$17,485.1"
+United Arab Emirates,High income,3725.5,"$1,711.5"
+Trinidad and Tobago,High income,471.8,$132.2
+Switzerland,High income,1290.3,"$3,873.0"
+Sweden,High income,1479.8,"$3,405.2"
+St. Kitts and Nevis,High income,6.8,$4.9
+Spain,High income,8148,"$8,107.7"
+Slovenia,High income,443.2,$245.1
+Slovak Republic,High income,1144,$467.4
+Singapore,High income,1201.6,"$1,440.4"
+Seychelles,High income,11,$7.2
+Saudi Arabia,High income,10411.9,"$3,359.0"
+Romania,High income,2911.4,$967.0
+Qatar,High income,1398.4,$625.2
+Portugal,High income,1588.6,"$1,394.5"
+Poland,High income,9427.5,"$2,510.3"
+Panama,High income,213.2,$227.1
+Oman,High income,1173.6,$353.0
+Norway,High income,1087.9,"$2,351.0"
+New Zealand,High income,896.7,$993.9
+Netherlands,High income,4828.4,"$5,363.2"
+Nauru,High income,2.3,$0.3
+Malta,High income,69.7,$61.7
+Luxembourg,High income,301.9,$334.0
+Lithuania,High income,421.2,$210.6
+Liechtenstein,High income,6,$31.6
+Latvia,High income,266.6,$137.2
+Kuwait,High income,1847.1,$657.4
+"Korea, Rep.",High income,14407.3,"$7,420.0"
+Japan,High income,35076.6,"$38,784.9"
+Italy,High income,12092.3,"$13,725.8"
+Israel,High income,1735.1,"$1,482.7"
+Ireland,High income,1160,"$1,603.6"
+Iceland,High income,61.5,$114.3
+Hungary,High income,1587.9,$727.5
+Greece,High income,2522.1,"$1,568.9"
+Germany,High income,24367,"$24,072.0"
+France,High income,10543.2,"$17,405.6"
+Finland,High income,1666.1,"$1,646.4"
+Estonia,High income,539.5,$114.9
+Denmark,High income,1511.6,"$2,105.0"
+Czechia,High income,3514.9,"$1,055.7"
+Cyprus,High income,208.3,$132.3
+Croatia,High income,546.6,$286.2
+Chile,High income,1781.9,"$1,226.3"
+Canada,High income,15436.5,"$9,711.7"
+Brunei Darussalam,High income,173.4,$78.2
+Belgium,High income,3206.6,"$3,165.2"
+Barbados,High income,42.8,$30.2
+Bahrain,High income,627.6,$149.5
+"Bahamas, The",High income,73.3,$66.5
+Austria,High income,1972,"$2,578.6"
+Australia,High income,10421.9,"$6,743.5"
+Antigua and Barbuda,High income,13,$7.9
+Andorra,High income,14.6,$18.6
+Zambia,Low income,94.4,$105.4
+"Yemen, Rep.",Low income,484.1,$111.8
+Uganda,Low income,75.7,$141.5
+Togo,Low income,48.4,$28.8
+Syrian Arab Republic,Low income,1275.8,$535.9
+Sudan,Low income,332.7,$315.8
+South Sudan,Low income,28.2,$40.2
+Somalia,Low income,18.4,$21.6
+Sierra Leone,Low income,16.7,$20.7
+Rwanda,Low income,20.3,$41.6
+Niger,Low income,32.7,$56.3
+Mozambique,Low income,83.6,$67.7
+Mali,Low income,58,$68.8
+Malawi,Low income,25.7,$42.5
+Madagascar,Low income,58.8,$73.1
+Liberia,Low income,20.7,$11.4
+Guinea-Bissau,Low income,6.6,$5.9
+Guinea,Low income,58.2,$50.1
+"Gambia, The",Low income,10.7,$8.9
+Ethiopia,Low income,201.8,$296.3
+Eritrea,Low income,18.2,$5.2
+"Congo, Dem. Rep.",Low income,74.8,$209.4
+Chad,Low income,28.9,$52.5
+Central African Republic,Low income,5.9,$14.4
+Burundi,Low income,8.5,$15.3
+Burkina Faso,Low income,53.6,$68.6
+Afghanistan,Low income,95.5,$82.0
+Zimbabwe,Middle Income,381.2,$112.4
+Vietnam,Middle Income,3287.7,"$1,000.1"
+Vanuatu,Middle Income,3.2,$4.1
+Uzbekistan,Middle Income,3472.7,$258.4
+Ukraine,Middle Income,9787.8,$802.5
+Tunisia,Middle Income,688.2,$259.4
+Timor-Leste,Middle Income,6.3,$6.0
+Tanzania,Middle Income,177.1,$212.5
+Tajikistan,Middle Income,127,$31.5
+Sri Lanka,Middle Income,376.6,$343.4
+Solomon Islands,Middle Income,8.4,$6.6
+Senegal,Middle Income,171,$115.2
+Sao Tome and Principe,Middle Income,2.4,$1.4
+Samoa,Middle Income,5.4,$4.0
+Philippines,Middle Income,2406.9,"$1,462.3"
+Papua New Guinea,Middle Income,129.3,$96.7
+Pakistan,Middle Income,3644.1,"$1,286.2"
+Nigeria,Middle Income,2851.1,"$2,010.6"
+Nicaragua,Middle Income,119.4,$64.3
+Nepal,Middle Income,136.5,$117.9
+Myanmar,Middle Income,356.6,$236.6
+Morocco,Middle Income,1292.7,$605.7
+Mongolia,Middle Income,400.3,$50.4
+"Micronesia, Fed. Sts.",Middle Income,3.9,$2.2
+Mauritania,Middle Income,59.1,$36.2
+Lesotho,Middle Income,14.5,$12.7
+Lebanon,Middle Income,545.7,$197.4
+Lao PDR,Middle Income,120.9,$58.2
+Kyrgyz Republic,Middle Income,250.5,$31.3
+Kiribati,Middle Income,1.5,$1.0
+Kenya,Middle Income,312.4,$328.0
+"Iran, Islamic Rep.",Middle Income,12940.6,"$2,239.8"
+Indonesia,Middle Income,10537.1,"$4,100.2"
+India,Middle Income,39882.7,"$10,167.5"
+Honduras,Middle Income,200.3,$109.8
+Haiti,Middle Income,57.4,$70.4
+Ghana,Middle Income,272.3,$236.8
+Eswatini,Middle Income,20.2,$22.8
+El Salvador,Middle Income,177.3,$128.8
+"Egypt, Arab Rep.",Middle Income,4778.1,"$1,361.0"
+Djibouti,Middle Income,12,$10.4
+Cote d'Ivoire,Middle Income,188.3,$257.1
+"Congo, Rep.",Middle Income,128.6,$62.0
+Comoros,Middle Income,4.2,$5.9
+Cameroon,Middle Income,188.9,$195.3
+Cambodia,Middle Income,136.2,$83.7
+Cabo Verde,Middle Income,10.6,$8.7
+Bolivia,Middle Income,398.1,$151.8
+Bhutan,Middle Income,12.1,$9.0
+Benin,Middle Income,93.4,$61.8
+Bangladesh,Middle Income,1166.5,"$1,096.8"
+Angola,Middle Income,553.2,$348.1
+Algeria,Middle Income,3119.6,$949.4
+Tuvalu,Middle Income,0.3,$0.2
+Turkmenistan,Middle Income,1524.1,$100.3
+Turkiye,Middle Income,7654.7,"$3,976.5"
+Tonga,Middle Income,3.5,$2.4
+Thailand,Middle Income,5962.8,"$2,134.2"
+Suriname,Middle Income,59,$20.2
+St. Vincent and the Grenadines,Middle Income,7,$4.6
+St. Lucia,Middle Income,14,$9.4
+South Africa,Middle Income,10590.6,"$2,199.3"
+Serbia,Middle Income,1451.4,$222.6
+Russian Federation,Middle Income,50028.7,"$7,930.0"
+Peru,Middle Income,1082.4,$913.2
+Paraguay,Middle Income,136.6,$163.3
+Palau,Middle Income,6.2,$1.1
+North Macedonia,Middle Income,261.1,$54.6
+Namibia,Middle Income,78.6,$59.5
+Montenegro,Middle Income,58.2,$18.9
+Moldova,Middle Income,313,$38.2
+Mexico,Middle Income,12061.2,"$6,648.4"
+Mauritius,Middle Income,84.5,$61.2
+Marshall Islands,Middle Income,3.6,$1.2
+Maldives,Middle Income,24.5,$15.4
+Malaysia,Middle Income,4726.9,"$1,497.1"
+Libya,Middle Income,1412.9,$337.8
+Kazakhstan,Middle Income,5781.8,$713.3
+Jordan,Middle Income,555.1,$172.4
+Jamaica,Middle Income,265.5,$90.2
+Iraq,Middle Income,3115.9,$897.3
+Guyana,Middle Income,52.2,$20.5
+Guatemala,Middle Income,318.8,$305.8
+Grenada,Middle Income,7.8,$5.4
+Georgia,Middle Income,261.6,$68.9
+Gabon,Middle Income,166.3,$87.1
+Fiji,Middle Income,31.9,$26.2
+Equatorial Guinea,Middle Income,157,$59.4
+Ecuador,Middle Income,868.4,$466.7
+Dominican Republic,Middle Income,544.6,$340.5
+Dominica,Middle Income,4.6,$3.2
+Cuba,Middle Income,800.6,$484.0
+Costa Rica,Middle Income,183.8,$246.2
+Colombia,Middle Income,1904.9,"$1,500.6"
+China,Middle Income,180722.8,"$43,178.6"
+Bulgaria,Middle Income,1457.5,$313.9
+Brazil,Middle Income,10285.3,"$9,680.2"
+Botswana,Middle Income,131.5,$74.8
+Bosnia and Herzegovina,Middle Income,498.5,$83.6
+Belize,Middle Income,16.3,$11.5
+Belarus,Middle Income,1852.1,$278.4
+Azerbaijan,Middle Income,979.8,$202.3
+Armenia,Middle Income,170.7,$49.0
+Argentina,Middle Income,4374.3,"$2,758.3"
+Albania,Middle Income,112.6,$64.6
