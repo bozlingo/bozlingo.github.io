@@ -4,135 +4,67 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 </head>
 <body>
-<h1 style='font-family: Arial; font-color: Blue'> Impact of CO2 Emissions on Economic Growth</h1>
+<div style="background: #E0E0E0">
+	<br>
+	<h1 style='font-family: Arial; color: navy'><center> Impact of CO2 Emissions on Economic Growth</center></h1>
+	<p style="margin: 20px; font-family: verdana; font-size: 16px; color: navy"> CS416 Assignment 2 - Tim Crosling</p>
+	<hr>
+</div>
+
+<center>
+<div id="page_1_dataviz" width=1100>
+	<div width=1100>
+		<p style="margin: 20px; font-family:verdana; font-size:20px; color: navy">Issue: Global CO2 Emissions Continue to Rise</p>
+	</div>
+	<div width=300>
+		<p style="margin: 20px; font-family:verdana; font-size:14px; color: navy"> 
+		Whilst high income countries emissions have begun to abate, <br>middle income country emissions are still growing rapidly.
+		</p>
+	</div>
+</div>
+<div id="page_2_dataviz" width="1100" hidden="hidden">
+</div>
+<div id="page_3_dataviz" width="1100" hidden="hidden"></div>
 
 <svg id='nav' width=60% height=40>
     <g id='page_1'>
-        <rect id='page_1_box' style='fill: #C3C3C3' stroke='grey' x=10 width=170 height=30></rect>
-        <text id='page_1_box_text' dx=15 dy='50%' style='font-family: Arial; font-weight: 600; fill: Black'>
+        <rect id='page_1_box' style='fill: #C3C3C3' stroke='grey' x=100 width=170 height=30></rect>
+        <text id='page_1_box_text' dx=105 dy='50%' style='font-family: Arial; font-weight: 600; fill: Black'>
             1. CO2 Emissions</text>
     </g>
     <g id='page_2'>
-        <rect id='page_2_box' style='fill: #C3C3C3' stroke='grey' x=190 width=170 height=30></rect>
-        <text id='page_2_box_text' dx=195 dy='50%' style='font-family: Arial; font-weight: 300; fill: black'>
+        <rect id='page_2_box' style='fill: #C3C3C3' stroke='grey' x=280 width=170 height=30></rect>
+        <text id='page_2_box_text' dx=285 dy='50%' style='font-family: Arial; font-weight: 300; fill: black'>
             2. Impact on Growth</text>
     </g>
     <g id='page_3'>
-        <rect id='page_3_box' style='fill: #C3C3C3' stroke='grey' x=370 width=170 height=30></rect>
-        <text id='page_3_box_text' dx=375 dy='50%' style='font-family: Arial; font-weight: 300; fill: black'>
-            3. Reduction Benefits</text>
+        <rect id='page_3_box' style='fill: #C3C3C3' stroke='grey' x=460 width=170 height=30></rect>
+        <text id='page_3_box_text' dx=465 dy='50%' style='font-family: Arial; font-weight: 300; fill: black'>
+            3. Efficiency</text>
     </g>
 </svg>
 
-<div id="page_1_dataviz">AAA</div>
-<div id="page_2_dataviz" hidden="hidden">HELLO1</div>
-<div id="page_3_dataviz" hidden="hidden">HELLO2</div>
-
+<div id="footer">
+	<p style="margin: 20px; font-family:verdana; font-size:8px; color: navy">
+		Source: World Development Indicators (wdi.worldbank.org)
+	</p>
+</div>
+</center>
 
 <script>
 // Set up the navigation bar
 var light_Grey= '#C3C3C3';
 var highlight_Blue = '3F48CC';
 
+// High income, medium income, low income
+var colorRange = ['#00A2E8','#FFA55F','#EB3324'];
+
 var pageSelected = 1;
-
-var margin = {top: 10, right: 30, bottom: 20, left: 50},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-var svg = d3.select("#page_1_dataviz")
-	.append("svg")
-		.attr('width', width + margin.left + margin.right)
-		.attr('height', height + margin.top + margin.bottom)
-	.append('g')
-		.attr("transform", 
-				"translate (" + margin.left + ", " + margin.top + ")");
-
-d3.csv("https://bozlingo.github.io/page_1_master_data.csv", function(data) {
-
-	// List of subgroups = header of the csv files = soil condition here
-	var subgroups = data.columns.slice(1)
-
-	// List of groups = species here = value of the first column called group -> I show them on the X axis
-	var groups = d3.map(data, function(d){return(d.group)}).keys()
-
-	var x = d3.scaleBand()
-		.domain(groups)
-		.range([0, width])
-		.padding([0.2])
-	svg.append("g")
-		.attr("transform", "translate(0," + height + ")")
-		.call(d3.axisBottom(x).tickSizeOuter(0));
-
-	var y = d3.scaleLinear()
-		.domain([0, 60])
-		.range([ height, 0 ]);
-	svg.append("g")
-		.call(d3.axisLeft(y));
-		
-	var color = d3.scaleOrdinal()
-		.domain(subgroups)
-		.range(['#C7EFCF','#FE5F55','#EEF5DB'])
-
-	// stack the data -> Stack per subgroup
-	var stackedData = d3.stack()
-		.keys(subgroups)
-		(data)
-	
-	// Create a tooltip
-	var tooltip = d3.select("#page_1_dataviz")
-		.append("div")
-		.style("opacity", 0)
-		.attr("class", "tooltip")
-		.style("background-color", "white")
-		.style("border", "solid")
-		.style("border-width", "1px")
-		.style("border-radius", "5px")
-		.style("padding", "10px")
-
-	var mouseover = function(d) {
-		var subgroupName = d3.select(this.parentNode).datum().key;
-		var subgroupValue = d.data[subgroupName];
-		tooltip
-			.html("subgroup: " + subgroupName + "<br>" + "Value: " + subgroupValue)
-			.style("opacity", 1)
-	}
-	var mousemove = function(d) {
-		tooltip
-		  .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-		  .style("top", (d3.mouse(this)[1]) + "px")
-	}
-	var mouseleave = function(d) {
-		tooltip
-		  .style("opacity", 0)
-	}
-
-	// Show the bars
-	svg.append("g")
-		.selectAll("g")
-		// Enter in the stack data = loop key per key = group per group
-		.data(stackedData)
-		.enter().append("g")
-			.attr("fill", function(d) { return color(d.key); })
-			.selectAll("rect")
-			// enter a second time = loop subgroup per subgroup to add all rectangles
-			.data(function(d) { return d; })
-			.enter().append("rect")
-				.attr("x", function(d) { return x(d.data.group); })
-				.attr("y", function(d) { return y(d[1]); })
-				.attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				.attr("width",x.bandwidth())
-				.attr("stroke", "grey")
-			.on("mouseover", mouseover)
-			.on("mousemove", mousemove)
-			.on("mouseleave", mouseleave)
-
-})
 
 // Create navigation controls
 d3.select('#page_1')
     .on('mouseover', function (d, i) {
-        d3.select('#page_1_box').style('fill', 'black');
+        d3.select('#page_1_box').style('fill', '#0023F5');
         d3.select('#page_1_box_text').style('fill', 'white'); 
     })
     .on('mouseout', function (d, i) {
@@ -155,7 +87,7 @@ d3.select('#page_1')
     });
 d3.select('#page_2')
     .on('mouseover', function (d, i) {
-        d3.select('#page_2_box').style('fill', 'black');
+        d3.select('#page_2_box').style('fill', '#0023F5');
         d3.select('#page_2_box_text').style('fill', 'white'); 
     })
     .on('mouseout', function (d, i) {
@@ -174,15 +106,17 @@ d3.select('#page_2')
 			.attr("hidden", null);
 		d3.select("#page_3_dataviz")
 			.attr("hidden", "hidden");
+		page2("All");
     });
 d3.select('#page_3')
     .on('mouseover', function (d, i) {
-        d3.select('#page_3_box').style('fill', 'black');
+        d3.select('#page_3_box').style('fill', '#0023F5');
         d3.select('#page_3_box_text').style('fill', 'white'); 
     })
     .on('mouseout', function (d, i) {
         d3.select('#page_3_box').style('fill', light_Grey);
         d3.select('#page_3_box_text').style('fill', 'Black'); 
+		
     })
     .on('click', function (d, i) {
         d3.select('#page_1_box_text').style('fill', 'black').style('font-weight', 300);
@@ -196,8 +130,611 @@ d3.select('#page_3')
 			.attr("hidden", "hidden");
 		d3.select("#page_3_dataviz")
 			.attr("hidden", null);
+		page3("World");
     });
-    
+	
+function showLegend(svg, page) {
+	var y = 380;
+	
+	// Legend High
+	svg.append("rect")
+			.attr("x", 0).attr("y", y)
+			.attr("height", 10).attr("width", 12)
+			.attr("stroke", "grey")
+			.attr("fill", colorRange[0])
+			.on("click", function (d) {
+				page2("High_Income");
+					
+				d3.select("#page_1_dataviz")
+					.attr("hidden", "hidden");
+				d3.select("#page_2_dataviz")
+					.attr("hidden", null);
+				d3.select("#page_3_dataviz")
+					.attr("hidden", "hidden");	
+			})
+	
+	svg.append("text")
+		.attr("font-family", "verdana").attr("font-size", "12px").attr("font-color", "#4A4A4A")
+		.attr("y", y+8).attr("x", 17)
+		.text("High Income Countries")
+		.on("click", function (d) {
+			page2("High_Income");
+			
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");	
+			})
+		
+	// Legend Medium
+	svg.append("rect")
+		.attr("x", 170).attr("y", y)
+		.attr("height", 10).attr("width", 12)
+		.attr("stroke", "grey")
+		.attr("fill", colorRange[1])
+		.on("click", function (d) {
+			page2("Medium_Income");
+			
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");	
+			})
+	
+	svg.append("text")
+		.attr("font-family", "verdana").attr("font-size", "12px").attr("font-color", "#4A4A4A")
+		.attr("y", y+8).attr("x", 185)
+		.text("Medium Income Countries")
+		.on("click", function (d) {
+			page2("Medium_Income");
+				
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");	
+			})
+
+	// Legend Low
+	svg.append("rect")
+		.attr("x", 360).attr("y", y)
+		.attr("height", 10).attr("width", 12)
+		.attr("stroke", "grey")
+		.attr("fill", colorRange[2])
+		.on("click", function (d) {
+			page2("Low_Income");
+				
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");	
+			})
+	
+	svg.append("text")
+		.attr("font-family", "verdana").attr("font-size", "12px").attr("font-color", "#4A4A4A")
+		.attr("y", y+8).attr("x", 375)
+		.text("Low Income Countries")
+		.on("click", function (d) {
+			page2("Low_Income");
+				
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");	
+			})
+}
+	
+//Load page 1
+var margin = {top: 10, right: 30, bottom: 50, left: 70},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+var svg1 = d3.select("#page_1_dataviz")
+	.append("svg")
+		.attr('width', width + margin.left + margin.right)
+		.attr('height', height + margin.top + margin.bottom)
+	.append('g')
+		.attr("transform", 
+				"translate (" + margin.left + ", " + margin.top + ")");
+
+d3.csv("https://bozlingo.github.io/page_1_master_data.csv", function(data) {
+
+	// List of subgroups = header of the csv files = soil condition here
+	var subgroups = data.columns.slice(1)
+
+	// List of groups = species here = value of the first column called group -> I show them on the X axis
+	var groups = d3.map(data, function(d){return(d.group)}).keys()
+
+	var x = d3.scaleBand()
+		.domain(groups)
+		.range([0, width])
+		.padding([0.2])
+	svg1.append("g")
+		.attr("transform", "translate(0," + height + ")")
+		.call(d3.axisBottom(x).tickSizeOuter(0));
+
+	var my = d3.max(data, function(d) {return +d.Medium_Income + +d.Low_Income + +d.High_Income;});
+
+	var y = d3.scaleLinear()
+		.domain([0, my])
+		.range([ height, 0 ]);
+	svg1.append("g")
+		.call(d3.axisLeft(y));
+		
+	var color = d3.scaleOrdinal()
+		.domain(subgroups)
+		.range(colorRange)
+
+	// stack the data -> Stack per subgroup
+	var stackedData = d3.stack()
+		.keys(subgroups)
+		(data)
+		
+	// Create a tooltip
+	var tooltip = d3.select("#page_1_dataviz")
+		.append("div")
+		.style("opacity", 0)
+		.attr("class", "tooltip")
+		.style("background-color", "white")
+		.style("border", "solid")
+		.style("border-width", "1px")
+		.style("border-radius", "5px")
+		.style("padding", "10px")
+
+	var page1_mouseover = function(d) {
+		var subgroupName = d3.select(this.parentNode).datum().key;
+		var subgroupValue = d.data[subgroupName];
+		tooltip
+			.html(subgroupName + " Countries emitted " + subgroupValue + "M metric tons of CO2" )
+			.style("opacity", 1)
+	}
+	var page1_mousemove = function(d) {
+		tooltip
+		  .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+		  .style("top", (d3.mouse(this)[1]) + "px")
+	}
+	var page1_mouseleave = function(d) {
+		tooltip
+		  .style("opacity", 0)
+	}
+
+	// Show the bars
+	svg1.append("g")
+		.selectAll("g")
+		// Enter in the stack data = loop key per key = group per group
+		.data(stackedData)
+		.enter().append("g")
+			.attr("fill", function(d) { return color(d.key); })
+			.selectAll("rect")
+			// enter a second time = loop subgroup per subgroup to add all rectangles
+			.data(function(d) { return d; })
+			.enter().append("rect")
+				.attr("x", function(d) { return x(d.data.group); })
+				.attr("y", function(d) { return y(d[1]); })
+				.attr("height", function(d) { return y(d[0]) - y(d[1]); })
+				.attr("width",x.bandwidth())
+				.attr("stroke", "grey")
+			.on("mouseover", page1_mouseover)
+			.on("mousemove", page1_mousemove)
+			.on("mouseleave", page1_mouseleave)
+			.on("click", function (d) {
+					var subgroupName = d3.select(this.parentNode).datum().key;
+					console.log("---->" + subgroupName);
+					page2(subgroupName);
+					
+					d3.select("#page_1_dataviz")
+						.attr("hidden", "hidden");
+					d3.select("#page_2_dataviz")
+						.attr("hidden", null);
+					d3.select("#page_3_dataviz")
+						.attr("hidden", "hidden");
+
+				});
+
+	// Add values to the bar chart
+	svg1.selectAll("g")
+			.selectAll("text")
+				.data(data)
+				.enter().append("text")
+					.attr("font-size", "12px")
+					.attr("font-weight", 500)
+					.attr("font-color", "navy")
+					.attr("x", function(d) { return x(d.group) + 25})
+					.attr("y", function(d) { 
+						return  y( parseInt(d.High_Income) + parseInt(d.Medium_Income) + parseInt(d.Low_Income) + 200);
+						})
+					.text(function (d) {
+						return parseInt(d.High_Income) + parseInt(d.Medium_Income) + parseInt(d.Low_Income);
+						})
+
+	svg1.append("text")
+		.attr("class", "y label")
+		.attr("text-anchor", "end")
+		.attr("text-anchor", "end")
+		.attr("font-family", "verdana")
+		.attr("font-size", "12px")
+		.attr("font-weight", 500)
+		.attr("font-color", "navy")
+		.attr("y", -margin.left	+ 10)
+		.attr("dy", ".75em")
+		.attr("transform", "rotate(-90)")
+		.text("Co2 Metric Tons, Millions");
+	
+	// Annotate that the chart is clickable
+	svg1.append("rect")
+		.attr("id", "TipRect")
+		.attr("x", 20)
+		.attr("y", 3)
+		.attr("width", 203)
+		.attr("height", 30)
+		.attr("fill", "white")
+		.attr("stroke", "#7F7F7F")
+		.transition()
+			.duration(4000)
+			.attr("stroke", "white")
+	svg1.append("text")
+		.attr("x", 25)
+		.attr("y", 22)
+		.attr("font-family", "verdana").attr("font-size", "12px").attr("fill", "#7F7F7F")
+		.text("Click an income group for detail")
+		.transition()
+			.duration(4000)
+			.attr("fill", "white")
+	
+	
+	showLegend (svg1, "page1");
+})
+
+function page2 (selected_Income_Group) {
+	d3.select("#page_2_dataviz").html("");
+	
+	console.log("PAGE2:" + selected_Income_Group);
+
+	d3.select("#page_2_dataviz")
+		.append("p")
+			.style("margin", "20px").style("font-family", "verdana").style("font-size", "20px").style("color", "navy")
+			.text("Direct relationship between CO2 Emissions and Economic Activity")
+
+	if (selected_Income_Group == "All") {
+		d3.select("#page_2_dataviz")
+			.append("p")
+				.style("margin", "20px").style("font-family", "verdana").style("font-size", "14px").style("color", "navy")
+				.text("Globally, there is a close correlation between CO2 emissions and economic activity.")
+	}
+	else if (selected_Income_Group == "Low_Income") {
+		d3.select("#page_2_dataviz")
+		.append("p")
+			.style("margin", "20px").style("font-family", "verdana").style("font-size", "14px").style("color", "navy")
+			.text("Low Income country GDP growth is correlated with CO2 Emissions");
+	}
+	else if (selected_Income_Group == "Medium_Income") {
+		d3.select("#page_2_dataviz")
+		.append("p")
+			.style("margin", "20px").style("font-family", "verdana").style("font-size", "14px").style("color", "navy")
+			.text("Medium Income country GDP growth is correlated with CO2 Emissions");
+	}
+	else if (selected_Income_Group == "High_Income") {
+		d3.select("#page_2_dataviz")
+		.append("p")
+			.style("margin", "20px").style("font-family", "verdana").style("font-size", "14px").style("color", "navy")
+			.text("High Income country GDP growth is correlated with CO2 Emissions");
+	}
+
+	// load page 2
+	var svg2 = d3.select("#page_2_dataviz")
+	  .append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform",
+			  "translate(" + margin.left + "," + margin.top + ")");
+
+	//Read the data
+	d3.csv("https://bozlingo.github.io/page_2_master_data.csv", function(data) {
+
+	  if (selected_Income_Group != "All") {
+			if (selected_Income_Group == "High_Income") {
+				var selectedData = data.filter(function(d) { return d.Income_Group == "High income" })
+			}
+			else if (selected_Income_Group == "Medium_Income") {
+				var selectedData = data.filter(function(d) { return d.Income_Group == "Middle Income" })
+			}
+			else {
+				var selectedData = data.filter(function(d) { return d.Income_Group == "Low income" })
+			}
+	  }
+	  else {
+		  var selectedData = data;
+	  }
+	  
+	  var mx = d3.max(selectedData, function(d) {return +d.Emissions;});
+	  var my = d3.max(selectedData, function(d) {return +d.GDP;});
+	  var minx = d3.min (selectedData, function(d) {return +d.Emissions;});
+	  var miny = d3.min (selectedData, function (d) { return +d.GDP;})
+
+	  // Add X axis
+	  var x = d3.scaleLog()
+		.domain([1, mx])
+		.range([ 0, width ]);
+	  svg2.append("g")
+		.attr("transform", "translate(0," + height + ")")
+		.call(d3.axisBottom(x));
+
+
+	 // Add Y axis
+	  var y = d3.scaleLog()
+		.domain([1, my])
+		.range([ height, 0])
+	  svg2.append("g")
+		.call(d3.axisLeft(y));
+
+	  // Color scale: give me a specie name, I return a color
+	  var color = d3.scaleOrdinal()
+		.domain(["setosa", "versicolor", "virginica" ])
+		.range(colorRange)
+		
+	  // Create a tooltip
+	  var tooltip = d3.select("#page_2_dataviz")
+			.append("div")
+			.style("opacity", 0)
+			.attr("class", "tooltip")
+			.style("background-color", "white")
+			.style("border", "solid")
+			.style("border-width", "1px")
+			.style("border-radius", "5px")
+			.style("padding", "10px")
+
+	  var page2_mouseover = function(d) {
+		tooltip
+			.html(d.Country + " " + d.Emissions + " M metric tons of CO2 emitted, $" +  d.GDP + "B GDP")
+			.style("opacity", 1)
+		}
+	  var page2_mousemove = function(d) {
+		tooltip
+			.style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+			.style("top", (d3.mouse(this)[1]) + "px")
+		}
+	  var page2_mouseleave = function(d) {
+		tooltip
+			.style("opacity", 0)
+		}	
+
+	  // Add dots
+	  svg2.append('g')
+		.selectAll("dot")
+		.data(selectedData)
+		.enter()
+		.append("circle")
+		  .attr("cx", function (d) { return x(d.Emissions); } )
+		  .attr("cy", function (d) { return y(d.GDP); } )
+		  .attr("r", 5)
+		  .style("fill", function (d) { 
+			if (d.Income_Group == "High income")
+				return colorRange[0];
+			else if (d.Income_Group == "Middle Income")
+				return colorRange[1];
+			else
+				return colorRange[2];
+
+			})
+		.on("mouseover", page2_mouseover)
+		.on("mousemove", page2_mousemove)
+		.on("mouseleave", page2_mouseleave)
+		.on("click", function(d) { 
+			
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_3_dataviz")
+				.attr("hidden", null);
+
+			page3(d.Country, selected_Income_Group);
+			});
+
+		svg2.append("text")
+			.attr("class", "y label")
+			.attr("text-anchor", "end")
+			.attr("text-anchor", "end")
+			.attr("font-family", "verdana")
+			.attr("font-size", "12px")
+			.attr("font-weight", 500)
+			.attr("font-color", "navy")
+			.attr("y", -margin.left	+ 10)
+			.attr("dy", ".75em")
+			.attr("transform", "rotate(-90)")
+			.text("GDP (US$B)");
+		
+		svg2.append("text")
+			.attr("class", "x label")
+			.attr("text-anchor", "end")
+			.attr("font-family", "verdana")
+			.attr("font-size", "12px")
+			.attr("font-weight", 500)
+			.attr("x", width-margin.left+80)
+			.attr("y", height + margin.bottom - 18)
+			.text("Avg. CO2 Emissions (Million Metric Tons)");
+
+		
+		// add the trendline
+		svg2.append("line")
+			.attr("x1", x(minx) )
+			.attr("y1", y(miny) )
+			.attr("x2", x(mx) )
+			.attr("y2", y(my) ) 
+			.attr("stroke", "grey")
+			.attr("stroke-width", 0)
+			.transition ()
+				.duration(4000)
+				.attr("stroke-width", 2)
+
+		// Annotate that the chart is clickable
+		svg2.append("rect")
+			.attr("id", "TipRect")
+			.attr("x", 20)
+			.attr("y", 3)
+			.attr("width", 167)
+			.attr("height", 30)
+			.attr("fill", "white")
+			.attr("stroke", "#7F7F7F")
+			.transition()
+				.duration(4000)
+				.attr("stroke", "white")
+		svg2.append("text")
+			.attr("x", 25)
+			.attr("y", 22)
+			.attr("font-family", "verdana").attr("font-size", "12px").attr("fill", "#7F7F7F")
+			.text("Click an country for detail")
+			.transition()
+				.duration(4000)
+				.attr("fill", "white")
+		
+		// add annotation arrow upward
+		svg2.append("rect")
+			.attr("x", 290)
+			.attr("y", 245)
+			.attr("width", 230)
+			.attr("height", 40)
+			.attr("fill", "white")
+			.attr("stroke", "grey")
+		svg2.append("image")
+			.attr("xlink:href", "Arrow.png")
+			.attr("width", 60)
+			.attr("height", 30)
+			.attr("x", 280)	
+			.attr("y", 250)
+		svg2.append("text")
+			.attr("x", 330)
+			.attr("y", 270)
+			.attr("font-family", "verdana").attr("font-size", "12px").attr("fill", "navy")
+			.text("Emissions rise in line with GDP");
+	
+		showLegend(svg2, "page2")
+	})
+}
+
+function page3 (selectedCountry, incomeGroup) {
+	var color = "#0FB16D"; // color for all
+	
+	if (incomeGroup == "High_Income")
+		color = colorRange [0];
+	else if (incomeGroup == "Medium_Income")
+		color = colorRange [1];
+	else if (incomeGroup == "Low_Income")
+		color = colorRange [2];
+
+	d3.select("#page_3_dataviz").html("");
+	
+	d3.select("#page_3_dataviz")
+		.append("p")
+			.style("margin", "20px")
+			.style("font-family", "verdana")
+			.style("font-size", "20px")
+			.style("color", "navy")
+			.text("However, economies are rapidly becoming more carbon efficient");
+			
+	d3.select("#page_3_dataviz")
+		.append("p")
+			.style("margin", "14px").style("font-family", "verdana").style("font-size", "14px").style("color", "navy")
+			.text(selectedCountry + " GDP Income per CO2 Emitted is increasing.");
+
+	// Load page 3
+	var svg3 = d3.select("#page_3_dataviz")
+	    .append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+		.on("click", function (d) {
+			d3.select("#page_1_dataviz")
+				.attr("hidden", "hidden");
+			d3.select("#page_2_dataviz")
+				.attr("hidden", null);
+			d3.select("#page_3_dataviz")
+				.attr("hidden", "hidden");
+		})	
+	    .append("g")
+			.attr("transform",
+				  "translate(" + margin.left + "," + margin.top + ")")
+
+	d3.csv("https://bozlingo.github.io/page_3_master_data.csv", function (data) {
+		//var selectedCountry = document.getElementById("country_selection").getAttribute("value");
+		console.log(selectedCountry);
+		
+		var selectedData = data.filter(function(d) { return d.Country == selectedCountry })
+			.map(function(d) { return [ d.Income_Per_CO2, d.Year]});
+		var groups = ["1990 - 1995", "1995 - 2000", "2000 - 2005", "2005 - 2010", "2010 - 2015", "2015 - 2020"];
+		var x = d3.scaleBand()
+			.domain(selectedData.map(function(d) {return d[1]; } ))
+			.range([0, width])
+			.padding([0.2])
+			//.tickValues(groups)
+		svg3.append("g")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(x).tickSizeOuter(0));
+		//console.log(selectedData);	
+		var my = d3.max(selectedData, function(d) {return +parseInt(d);});
+
+		var y = d3.scaleLinear()
+			.domain([0, my])
+			.range([height, 0])
+		svg3.append("g")
+			.call(d3.axisLeft(y));
+
+		var divTooltip = d3.select("body").append("div").attr("class", "toolTip");
+		
+		// Show the bars
+		svg3.append("g")
+			.attr("id", "bars_g")
+			.selectAll("rect")
+				.data(selectedData)
+				.enter().append("rect")
+					.attr("x", function(d, i) { return x(d[1]); })
+					.attr("y", function (d) { 800 })
+					.attr("height", function(d) { 20 })
+					.attr("width",x.bandwidth())
+					.attr("stroke", "grey")
+					.attr("fill", color)
+					.transition()
+						.attr("height", function (d) { return y(my - parseInt(d[0])); })
+						.attr("y", function (d) { return y(parseInt(d[0])) })
+				
+		svg3.selectAll("g")
+			.selectAll("text")
+				.data(selectedData)
+				.enter().append("text")
+					.attr("font-size", "12px")
+					.attr("font-weight", 500)
+					.attr("font-color", "navy")
+					.attr("x", function(d, i) { return x(d[1]) + (x.bandwidth() / 4); })
+					.attr("y", function (d) { return y(parseInt(d[0]) + 10) })
+					.text(function(d) { return "$" + d[0]; })
+
+		svg3.append("text")
+			.attr("class", "y label")
+			.attr("text-anchor", "end")
+			.attr("text-anchor", "end")
+			.attr("font-family", "verdana")
+			.attr("font-size", "12px")
+			.attr("font-weight", 500)
+			.attr("font-color", "navy")
+			.attr("y", -margin.left	+ 10)
+			.attr("dy", ".75em")
+			.attr("transform", "rotate(-90)")
+			.text("$GDP per Emitted CO2 Metric Ton");
+		
+	})
+}
+page2 ("All")
+page3 ("World")
+   
 </script>
 </body>
 </html>
